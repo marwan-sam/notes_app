@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:note_app/components/body_note.dart';
 
 import '../components/componts.dart';
 
@@ -25,8 +26,9 @@ class NotesScreen extends StatelessWidget {
                 IconSreachUI(),
               ],
             ),
-            // * Notes
-            NoteItme(),
+            // * Notes :=
+            // NoteItme(),
+            const ListViewNotes(),
           ],
         ),
       ),
