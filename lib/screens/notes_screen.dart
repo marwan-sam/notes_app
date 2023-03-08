@@ -26,6 +26,7 @@ class NotesScreen extends StatelessWidget {
               ],
             ),
             // * Notes
+            NoteItme(),
           ],
         ),
       ),
