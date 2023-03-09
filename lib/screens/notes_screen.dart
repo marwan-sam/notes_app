@@ -10,6 +10,18 @@ class NotesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            context: context,
+            builder: (context) => BodyOfNewNoteUI(),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -28,7 +40,9 @@ class NotesScreen extends StatelessWidget {
             ),
             // * Notes :=
             // NoteItme(),
-            const ListViewNotes(),
+            const Expanded(
+              child: ListViewNotes(),
+            ),
           ],
         ),
       ),
