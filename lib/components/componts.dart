@@ -137,11 +137,14 @@ Widget InputsTextFormFeild({
 
 // * after click in btn add to show in showModalBottomSheet :=
 Widget BodyOfNewNoteUI() => Container(
-      child: Column(
-        children: [
-          InputsTextFormFeild(
-            txtHint: 'Add A New Note',
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            InputsTextFormFeild(
+              txtHint: 'Add A New Note',
+            ),
+          ],
+        ),
       ),
     );
