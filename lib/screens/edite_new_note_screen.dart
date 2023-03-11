@@ -17,8 +17,8 @@ class EditNoteScreen extends StatelessWidget {
             txtBtn: 'Accepted Edit',
           ),
           AppBar: AppBarScreen(
-            txtTitle: 'Note Edit',
-            icon: Icons.check,
+            txtTitle: 'Edit Note',
+            icon: Icons.close,
           ),
         ),
       ),

@@ -181,7 +181,7 @@ Widget BodyOfWidgetUI({
   required String txt1,
   required String txt2,
   required String txtBtn,
-  double? widthBtn,
+  double widthBtn = double.infinity,
 }) =>
     Padding(
       padding: const EdgeInsets.all(16.0),
@@ -207,7 +207,7 @@ Widget BodyOfWidgetUI({
             // const Spacer(flex: 1),
             Button(
               txt: txtBtn,
-              btnWidth: widthBtn!,
+              btnWidth: widthBtn,
             ),
           ],
         ),
