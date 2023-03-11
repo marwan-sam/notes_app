@@ -10,7 +10,7 @@ void main() async {
       .initFlutter(); // to init. dart extentions hive flutter use import => hive_flutter.dart
 
   // stp = 2
-  await Hive.box(boxNoteHive);
+  await Hive.openBox(boxNoteHive);
 
   runApp(const MyApp());
 }

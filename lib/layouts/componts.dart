@@ -91,7 +91,7 @@ Widget InputsTextFormFeild({
   Color colorBorderFoucsedOn = Colors.blue,
   Color colorBorderShowing = Colors.white,
   Color colorBorderError = Colors.red,
-  Function(String)? savedValue,
+  Function(String)? onChangeValue,
   Icon? suffixIconAddInLeft,
   Color? suffixColor,
   Icon? perfixIconAddInRight,
@@ -99,8 +99,10 @@ Widget InputsTextFormFeild({
   TextEditingController? controller,
   bool isPassword = false,
   int? maxLines = 1,
+  void Function(String?)? onSaved,
 }) =>
     TextFormField(
+      onSaved: onSaved,
       maxLines: maxLines,
       style: styleTxt,
       obscureText: isPassword,
@@ -108,11 +110,11 @@ Widget InputsTextFormFeild({
       onFieldSubmitted: onFieldSubmitted,
       validator: (data) {
         if (data!.isEmpty) {
-          return 'Value Not Must Empty !';
+          return "Value Can't Be Empty !";
         }
         return null;
       },
-      onChanged: savedValue,
+      onChanged: onChangeValue,
       decoration: InputDecoration(
         prefixIcon: perfixIconAddInRight,
         prefixIconColor: perfixColor,
@@ -176,40 +178,52 @@ Widget Button({
       ),
     );
 
-// * after click in btn add to show in showModalBottomSheet :=
-Widget BodyOfWidgetUI({
-  required String txt1,
-  required String txt2,
-  required String txtBtn,
+// * after click in btn add to show in showModalBottomSheet or open stander form:=
+Widget StandardFormUI({
+  required String hint1,
+  required String hint2,
+  String? txtBtn,
   double widthBtn = double.infinity,
+  required key,
+  required AutovalidateMode? autovalidateMode,
+  void Function(String?)? onSaved1,
+  void Function(String?)? onSaved2,
+  VoidCallback? onClickBtn,
 }) =>
     Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30.0,
-            ),
-            InputsTextFormFeild(
-              txtHint: txt1,
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            InputsTextFormFeild(
-              txtHint: txt2,
-              maxLines: 4,
-            ),
-            const SizedBox(
-              height: 50.0,
-            ),
-            // const Spacer(flex: 1),
-            Button(
-              txt: txtBtn,
-              btnWidth: widthBtn,
-            ),
-          ],
+        child: Form(
+          key: key,
+          autovalidateMode: autovalidateMode,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30.0,
+              ),
+              InputsTextFormFeild(
+                txtHint: hint1,
+                onSaved: onSaved1,
+              ),
+              const SizedBox(
+                height: 30.0,
+              ),
+              InputsTextFormFeild(
+                txtHint: hint2,
+                onSaved: onSaved2,
+                maxLines: 4,
+              ),
+              const SizedBox(
+                height: 50.0,
+              ),
+              // const Spacer(flex: 1),
+              Button(
+                txt: txtBtn!,
+                btnWidth: widthBtn,
+                clicked: onClickBtn,
+              ),
+            ],
+          ),
         ),
       ),
     );
