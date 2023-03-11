@@ -4,7 +4,7 @@ import 'package:note_app/screens/widgets/appBar.dart';
 import 'package:note_app/screens/widgets/listview_notes.dart';
 
 import '../layouts/componts.dart';
-import 'widgets/modelSheet.dart';
+import 'widgets/add_note_by_model_sheet.dart';
 
 class NotesScreen extends StatelessWidget {
   const NotesScreen({super.key});
