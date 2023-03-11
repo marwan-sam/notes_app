@@ -18,7 +18,21 @@ class MyBlocObserver extends BlocObserver {
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
     // TODO: implement onChange
-    debugPrint('Change =>>> ${change}');
+    debugPrint('Bloc Change State =>>> ${change}');
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    // TODO: implement onChange
+    debugPrint('<< Bloc Close State =>>> $bloc >>');
+  }
+
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    // TODO: implement onChange
+    debugPrint('<< Bloc Create State =>>> $bloc >>');
   }
 
   @override

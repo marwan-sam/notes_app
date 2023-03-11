@@ -13,11 +13,11 @@ void main() async {
   await Hive
       .initFlutter(); // to init. dart extentions hive flutter use import => hive_flutter.dart
 
-  // stp = 2
-  await Hive.openBox(boxNoteHive);
-
-  // stp = 3 : register typeAdaptor :=
+  // stp = 2 : register typeAdaptor :=
   Hive.registerAdapter(NoteModelAdapter());
+
+  // stp = 3
+  await Hive.openBox<NoteModel>(boxNoteHive);
 
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
@@ -29,22 +29,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AddNoteCubit(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // theme: ThemeData.light(),
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          fontFamily: 'Poppins',
-        ),
-
-        home: const NotesScreen(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // theme: ThemeData.light(),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        fontFamily: 'Poppins',
       ),
+
+      home: const NotesScreen(),
     );
   }
 }
