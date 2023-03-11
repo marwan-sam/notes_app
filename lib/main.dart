@@ -5,6 +5,7 @@ import 'package:note_app/cubits/add_note/cubit/add_note_cubit.dart';
 import 'package:note_app/model/model_note.dart';
 import 'package:note_app/screens/notes_screen.dart';
 
+import 'BlocObserver.dart';
 import 'layouts/conts.dart';
 
 void main() async {
@@ -18,6 +19,7 @@ void main() async {
   // stp = 3 : register typeAdaptor :=
   Hive.registerAdapter(NoteModelAdapter());
 
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
