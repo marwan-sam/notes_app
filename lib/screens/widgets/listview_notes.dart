@@ -9,7 +9,7 @@ class ListViewNotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      // shrinkWrap: true,
+      padding: EdgeInsets.zero,
       // itemCount: 5,
       itemBuilder: (BuildContext context, int index) {
         return Padding(

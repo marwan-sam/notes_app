@@ -177,10 +177,14 @@ Widget Button({
     );
 
 // * after click in btn add to show in showModalBottomSheet :=
-Widget BodyOfWidgetUI(
-        {required String txt1, required String txt2, required String txtBtn}) =>
+Widget BodyOfWidgetUI({
+  required String txt1,
+  required String txt2,
+  required String txtBtn,
+  double? widthBtn,
+}) =>
     Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -203,6 +207,7 @@ Widget BodyOfWidgetUI(
             // const Spacer(flex: 1),
             Button(
               txt: txtBtn,
+              btnWidth: widthBtn!,
             ),
           ],
         ),
@@ -215,23 +220,21 @@ Widget BodyOfChilds({
 }) =>
     Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 35.0,
-          ),
-          // * App Bar =
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [AppBar],
-          ),
-          // * Notes :=
-          // NoteItme(),
-          SizedBox(
-            height: 670,
-            child: BodyOf,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 35.0,
+            ),
+            // * App Bar =
+            AppBar,
+            // * Notes :=
+            // NoteItme(),
+            SizedBox(
+              height: 670,
+              child: BodyOf,
+            ),
+          ],
+        ),
       ),
     );

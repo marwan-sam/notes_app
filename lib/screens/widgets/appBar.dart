@@ -9,6 +9,8 @@ class AppBarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
       children: [
         TitleAppBarUI(txt: txtTitle),
         IconAppBarUI(icon: icon),

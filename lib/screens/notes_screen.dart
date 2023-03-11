@@ -4,6 +4,7 @@ import 'package:note_app/screens/widgets/appBar.dart';
 import 'package:note_app/screens/widgets/listview_notes.dart';
 
 import '../layouts/componts.dart';
+import 'widgets/modelSheet.dart';
 
 class NotesScreen extends StatelessWidget {
   const NotesScreen({super.key});
@@ -19,14 +20,7 @@ class NotesScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
             ),
             context: context,
-            builder: (context) => SizedBox(
-              height: 700,
-              child: BodyOfWidgetUI(
-                txt1: 'Add A New Note',
-                txt2: 'Content Of Note',
-                txtBtn: 'Add New Note',
-              ),
-            ),
+            builder: (context) => const ModelSheetAddNewNote(),
           );
         },
         child: const Icon(Icons.add),
