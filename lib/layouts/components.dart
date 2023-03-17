@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'conts.dart';
+
 // * Icon Search = :
 Widget IconAppBarUI({required IconData? icon}) => Container(
       width: 38,
@@ -146,15 +148,16 @@ Widget InputsTextFormFeild({
     );
 
 // * For Btn Add New Notes :=
-Widget Button({
+Widget ButtonOrProcess({
   required String txt,
   Color btnBackground = Colors.white,
-  Color txtColor = const Color(0xff2B475E),
+  Color txtColor = blueDarkColor,
   double txtSize = 20.0,
   double btnWidth = double.infinity,
   double btnHeight = 50.0,
   double radius = 10.0,
   VoidCallback? clicked,
+  bool isLoading = false,
 }) =>
     GestureDetector(
       onTap: clicked,
@@ -166,70 +169,28 @@ Widget Button({
           borderRadius: BorderRadius.circular(radius),
         ),
         child: Center(
-          child: Text(
-            txt,
-            style: TextStyle(
-              color: txtColor,
-              // fontFamily: 'Pacifico',
-              fontSize: txtSize,
-            ),
-          ),
+          child: isLoading
+              ? const SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    color: blueDarkColor,
+                  ),
+                )
+              : Text(
+                  txt,
+                  style: TextStyle(
+                    color: txtColor,
+                    // fontFamily: 'Pacifico',
+                    fontSize: txtSize,
+                  ),
+                ),
         ),
       ),
     );
 
-// * after click in btn add to show in showModalBottomSheet or open stander form:=
-Widget StandardFormUI({
-  required String hint1,
-  required String hint2,
-  String? txtBtn,
-  double widthBtn = double.infinity,
-  required key,
-  required AutovalidateMode? autovalidateMode,
-  void Function(String?)? onSaved1,
-  void Function(String?)? onSaved2,
-  VoidCallback? onClickBtn,
-}) =>
-    Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Form(
-          key: key,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30.0,
-              ),
-              InputsTextFormFeild(
-                txtHint: hint1,
-                onSaved: onSaved1,
-              ),
-              const SizedBox(
-                height: 30.0,
-              ),
-              InputsTextFormFeild(
-                txtHint: hint2,
-                onSaved: onSaved2,
-                maxLines: 4,
-              ),
-              const SizedBox(
-                height: 50.0,
-              ),
-              // const Spacer(flex: 1),
-              Button(
-                txt: txtBtn!,
-                btnWidth: widthBtn,
-                clicked: onClickBtn,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-Widget BodyOfChilds({
-  required Widget BodyOf,
+Widget BodyOfItems({
+  Widget? BodyOf,
   required Widget AppBar,
 }) =>
     Padding(
@@ -250,5 +211,84 @@ Widget BodyOfChilds({
             ),
           ],
         ),
+      ),
+    );
+
+// Widget BodyOfEdite({
+//   StandardFormUI? BodyOf,
+//   required Widget AppBar,
+// }) =>
+//     Padding(
+//       padding: const EdgeInsets.all(20.0),
+//       child: Column(
+//         children: [
+//           const SizedBox(
+//             height: 35.0,
+//           ),
+//           // * App Bar =
+//           AppBar,
+//           // * Notes :=
+//           // NoteItme(),
+//           SizedBox(
+//             height: 670,
+//             child: BodyOf,
+//           ),
+//         ],
+//       ),
+//     );
+
+// * after click in btn add to show in showModalBottomSheet or open stander form:=
+Widget StandardFormUI({
+  required String hint1,
+  required String hint2,
+  // required String? txtBtn,
+  // double widthBtn = double.infinity,
+  // required Key? keyForm,
+  // AutovalidateMode? autovalidateMode,
+  void Function(String?)? onSaved1,
+  void Function(String?)? onSaved2,
+  // VoidCallback? onClickBtn,
+}) =>
+    SingleChildScrollView(
+      // child: Form(
+      // key: keyForm,
+      // autovalidateMode: autovalidateMode,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 30.0,
+          ),
+          InputsTextFormFeild(
+            txtHint: hint1,
+            onSaved: onSaved1,
+          ),
+          const SizedBox(
+            height: 30.0,
+          ),
+          InputsTextFormFeild(
+            txtHint: hint2,
+            onSaved: onSaved2,
+            maxLines: 4,
+          ),
+          const SizedBox(
+            height: 50.0,
+          ),
+          // const Spacer(flex: 1),
+          // BlocBuilder<AddNoteCubit, AddNoteState>(
+          //   builder: (context, state) {
+          //     return Center(
+          //       child: isloading
+          //           ? const CircularProgressIndicator(
+          //               color: blueDarkColor,
+          //             )
+          //           : Button(
+          //               txt: txtBtn!,
+          //               btnWidth: widthBtn,
+          //               clicked: onClickBtn,
+          // ),
+          // );
+          // },
+          // ),
+        ],
       ),
     );

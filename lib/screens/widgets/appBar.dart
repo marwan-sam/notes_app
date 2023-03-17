@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/layouts/componts.dart';
+import 'package:note_app/layouts/components.dart';
 
 class AppBarScreen extends StatelessWidget {
   AppBarScreen({super.key, required this.txtTitle, required this.icon});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/layouts/componts.dart';
+import 'package:note_app/layouts/components.dart';
 import 'package:note_app/screens/edite_new_note_screen.dart';
 
 class ListViewNotes extends StatelessWidget {
