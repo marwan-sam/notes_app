@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note/cubit/add_note_cubit.dart';
-import 'package:note_app/layouts/componts.dart';
+import 'package:note_app/layouts/components.dart';
 import 'package:note_app/model/model_note.dart';
 
 class ModelSheetAddNewNote extends StatefulWidget {
@@ -12,8 +13,6 @@ class ModelSheetAddNewNote extends StatefulWidget {
 }
 
 class _ModelSheetAddNewNoteState extends State<ModelSheetAddNewNote> {
-  final double h = 600;
-
   final GlobalKey<FormState> formKey = GlobalKey();
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
@@ -76,10 +75,13 @@ class _ModelSheetAddNewNoteState extends State<ModelSheetAddNewNote> {
                           clicked: () {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
+                              var time =
+                                  DateFormat.yMd().format(DateTime.now());
+                              // DateFormat('dd/mm/yyyy  :  HH:MM').format(DateTime.now());
                               var data = NoteModel(
                                 title: title!,
                                 subTitle: subTitle!,
-                                date: DateTime.now().toString(),
+                                date: time,
                                 color: Colors.blue.value,
                               );
                               BlocProvider.of<AddNoteCubit>(context)

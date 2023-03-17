@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:note_app/model/model_note.dart';
 
 import 'conts.dart';
 
@@ -32,12 +34,13 @@ Widget TitleAppBarUI({required String txt}) => Text(
 // * one of item note: =
 Widget NoteItmeUI({
   void Function()? onTap,
+  required final NoteModel item,
 }) =>
     GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blueGrey,
+          color: Color(item.color),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Padding(
@@ -51,32 +54,34 @@ Widget NoteItmeUI({
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               ListTile(
-                title: const Text(
-                  'Title Task',
-                  style: TextStyle(
+                title: Text(
+                  item.title,
+                  style: const TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                subtitle: const Padding(
-                  padding: EdgeInsets.only(
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(
                     top: 8,
                     bottom: 8,
                   ),
                   child: Text(
-                    'Descriptions Of Task',
-                    style: TextStyle(
+                    item.subTitle,
+                    style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    item.delete();
+                  },
                   icon: const Icon(FontAwesomeIcons.trash),
                 ),
               ),
-              const Text('20/2/2001'),
+              Text(item.date),
             ],
           ),
         ),
@@ -214,40 +219,12 @@ Widget BodyOfItems({
       ),
     );
 
-// Widget BodyOfEdite({
-//   StandardFormUI? BodyOf,
-//   required Widget AppBar,
-// }) =>
-//     Padding(
-//       padding: const EdgeInsets.all(20.0),
-//       child: Column(
-//         children: [
-//           const SizedBox(
-//             height: 35.0,
-//           ),
-//           // * App Bar =
-//           AppBar,
-//           // * Notes :=
-//           // NoteItme(),
-//           SizedBox(
-//             height: 670,
-//             child: BodyOf,
-//           ),
-//         ],
-//       ),
-//     );
-
 // * after click in btn add to show in showModalBottomSheet or open stander form:=
 Widget StandardFormUI({
   required String hint1,
   required String hint2,
-  // required String? txtBtn,
-  // double widthBtn = double.infinity,
-  // required Key? keyForm,
-  // AutovalidateMode? autovalidateMode,
   void Function(String?)? onSaved1,
   void Function(String?)? onSaved2,
-  // VoidCallback? onClickBtn,
 }) =>
     SingleChildScrollView(
       // child: Form(
@@ -273,22 +250,19 @@ Widget StandardFormUI({
           const SizedBox(
             height: 50.0,
           ),
-          // const Spacer(flex: 1),
-          // BlocBuilder<AddNoteCubit, AddNoteState>(
-          //   builder: (context, state) {
-          //     return Center(
-          //       child: isloading
-          //           ? const CircularProgressIndicator(
-          //               color: blueDarkColor,
-          //             )
-          //           : Button(
-          //               txt: txtBtn!,
-          //               btnWidth: widthBtn,
-          //               clicked: onClickBtn,
-          // ),
-          // );
-          // },
-          // ),
         ],
       ),
+    );
+
+Widget emptyListOfNote() => Column(
+      children: const [
+        Center(
+          child: Text(
+            "Don't Have Any Notes",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
