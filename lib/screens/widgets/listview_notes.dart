@@ -37,6 +37,10 @@ class _ListViewNotesState extends State<ListViewNotes> {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: NoteItmeUI(
+                iconTrailingCilck: () {
+                  notes[index].delete();
+                  BlocProvider.of<NotesCubit>(context).fetchNotes();
+                },
                 item: notes[index],
                 onTap: () {
                   Navigator.push(

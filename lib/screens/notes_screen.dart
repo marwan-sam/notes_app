@@ -13,29 +13,26 @@ class NotesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NotesCubit(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              context: context,
-              builder: (context) => const ModelSheetAddNewNote(),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
-        body: BodyOfItems(
-          BodyOf: const ListViewNotes(),
-          AppBar: AppBarScreen(
-            txtTitle: 'Notes',
-            icon: Icons.search,
-          ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            context: context,
+            builder: (context) => const ModelSheetAddNewNote(),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: BodyOfItems(
+        BodyOf: const ListViewNotes(),
+        AppBar: AppBarScreen(
+          txtTitle: 'Notes',
+          icon: Icons.search,
         ),
       ),
     );

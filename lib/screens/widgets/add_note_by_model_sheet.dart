@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note/cubit/add_note_cubit.dart';
+import 'package:note_app/cubits/note_store/cubit/notes_cubit.dart';
 import 'package:note_app/layouts/components.dart';
 import 'package:note_app/model/model_note.dart';
 
@@ -36,6 +37,7 @@ class _ModelSheetAddNewNoteState extends State<ModelSheetAddNewNote> {
 
         if (state is AddNoteSuccState) {
           Navigator.pop(context);
+          BlocProvider.of<NotesCubit>(context).fetchNotes();
         } else if (state is AddNoteErrorState) {
           print('error from state add note :]= ${state.error}');
         }

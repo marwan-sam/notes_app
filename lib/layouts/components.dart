@@ -35,6 +35,7 @@ Widget TitleAppBarUI({required String txt}) => Text(
 Widget NoteItmeUI({
   void Function()? onTap,
   required final NoteModel item,
+  required VoidCallback iconTrailingCilck,
 }) =>
     GestureDetector(
       onTap: onTap,
@@ -75,9 +76,7 @@ Widget NoteItmeUI({
                   ),
                 ),
                 trailing: IconButton(
-                  onPressed: () {
-                    item.delete();
-                  },
+                  onPressed: iconTrailingCilck,
                   icon: const Icon(FontAwesomeIcons.trash),
                 ),
               ),
