@@ -3,18 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/cubits/note_store/cubit/notes_cubit.dart';
 import 'package:note_app/layouts/components.dart';
 import 'package:note_app/model/model_note.dart';
-import 'package:note_app/screens/edite_new_note_screen.dart';
+import 'package:note_app/screens/edit_note_screen.dart';
 
 class ListViewNotes extends StatefulWidget {
-  const ListViewNotes({super.key});
+  const ListViewNotes({Key? key}) : super(key: key);
 
   @override
   State<ListViewNotes> createState() => _ListViewNotesState();
 }
 
 class _ListViewNotesState extends State<ListViewNotes> {
-  final colors = const [];
-
   @override
   void initState() {
     BlocProvider.of<NotesCubit>(context).fetchNotes();
@@ -34,24 +32,54 @@ class _ListViewNotesState extends State<ListViewNotes> {
           // itemCount: 4,
 
           itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              child: NoteItmeUI(
-                iconTrailingCilck: () {
-                  notes[index].delete();
-                  BlocProvider.of<NotesCubit>(context).fetchNotes();
-                },
-                item: notes[index],
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EditNoteScreen(),
+            return index == notes.length - 1
+                ? SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 160),
+                        child: NoteItmeUI(
+                          iconTrailingCilck: () {
+                            notes[index].delete();
+                            BlocProvider.of<NotesCubit>(context).fetchNotes();
+                          },
+                          item: notes[index],
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditNoteScreen(
+                                  note: notes[index],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      child: NoteItmeUI(
+                        iconTrailingCilck: () {
+                          notes[index].delete();
+                          BlocProvider.of<NotesCubit>(context).fetchNotes();
+                        },
+                        item: notes[index],
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditNoteScreen(
+                                note: notes[index],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   );
-                },
-              ),
-            );
           },
         );
       },

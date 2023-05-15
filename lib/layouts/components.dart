@@ -6,18 +6,21 @@ import 'package:note_app/model/model_note.dart';
 import 'conts.dart';
 
 // * Icon Search = :
-Widget IconAppBarUI({required IconData? icon}) => Container(
-      width: 38,
-      padding: const EdgeInsets.all(5.0),
+Widget IconAppBarUI(
+        {required Widget icon, required void Function()? clickOn}) =>
+    Container(
+      // width: 38,
+      // padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: Colors.white.withOpacity(0.1),
       ),
-      child: Icon(
-        icon,
+      child: IconButton(
+        onPressed: clickOn,
+        icon: icon,
         color: Colors.white.withOpacity(0.9),
         // weight: 20,
-        size: 30,
+        iconSize: 30,
       ),
     );
 
@@ -35,7 +38,7 @@ Widget TitleAppBarUI({required String txt}) => Text(
 Widget NoteItmeUI({
   void Function()? onTap,
   required final NoteModel item,
-  required VoidCallback iconTrailingCilck,
+  VoidCallback? iconTrailingCilck,
 }) =>
     GestureDetector(
       onTap: onTap,
@@ -196,6 +199,7 @@ Widget ButtonOrProcess({
 Widget BodyOfItems({
   Widget? BodyOf,
   required Widget AppBar,
+  double heigth = 700,
 }) =>
     Padding(
       padding: const EdgeInsets.all(20.0),
@@ -203,14 +207,14 @@ Widget BodyOfItems({
         child: Column(
           children: [
             const SizedBox(
-              height: 35.0,
+              height: 45.0,
             ),
             // * App Bar =
             AppBar,
             // * Notes :=
             // NoteItme(),
             SizedBox(
-              height: 670,
+              height: heigth,
               child: BodyOf,
             ),
           ],
@@ -219,16 +223,15 @@ Widget BodyOfItems({
     );
 
 // * after click in btn add to show in showModalBottomSheet or open stander form:=
-Widget StandardFormUI({
+Widget StandardUI({
   required String hint1,
   required String hint2,
-  void Function(String?)? onSaved1,
-  void Function(String?)? onSaved2,
+  Function(String?)? onSaved1,
+  Function(String?)? onSaved2,
+  Function(String?)? onChangeValue1,
+  Function(String?)? onChangeValue2,
 }) =>
     SingleChildScrollView(
-      // child: Form(
-      // key: keyForm,
-      // autovalidateMode: autovalidateMode,
       child: Column(
         children: [
           const SizedBox(
@@ -237,6 +240,7 @@ Widget StandardFormUI({
           InputsTextFormFeild(
             txtHint: hint1,
             onSaved: onSaved1,
+            onChangeValue: onChangeValue1,
           ),
           const SizedBox(
             height: 30.0,
@@ -244,15 +248,26 @@ Widget StandardFormUI({
           InputsTextFormFeild(
             txtHint: hint2,
             onSaved: onSaved2,
+            onChangeValue: onChangeValue2,
             maxLines: 4,
           ),
           const SizedBox(
-            height: 50.0,
+            height: 20.0,
           ),
         ],
       ),
     );
 
+StandardFormUI({
+  AutovalidateMode? autovalidateMode,
+  Key? key,
+  required Widget standardUI,
+}) =>
+    Form(
+      key: key,
+      autovalidateMode: autovalidateMode,
+      child: standardUI,
+    );
 Widget emptyListOfNote() => Column(
       children: const [
         Center(
@@ -264,4 +279,16 @@ Widget emptyListOfNote() => Column(
           ),
         ),
       ],
+    );
+
+Widget ListOf({
+  required void Function()? onTap,
+  required Widget viewItem,
+}) =>
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: GestureDetector(
+        onTap: onTap,
+        child: viewItem,
+      ),
     );

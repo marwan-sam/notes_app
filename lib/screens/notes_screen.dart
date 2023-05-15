@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:note_app/cubits/note_store/cubit/notes_cubit.dart';
+import 'package:note_app/screens/search_delegate_screen.dart';
 import 'package:note_app/screens/widgets/appBar.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:note_app/screens/widgets/listview_notes.dart';
@@ -14,7 +13,7 @@ class NotesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
@@ -29,10 +28,14 @@ class NotesScreen extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
       body: BodyOfItems(
+        // heigth: MediaQuery.of(context).size.height,
         BodyOf: const ListViewNotes(),
         AppBar: AppBarScreen(
           txtTitle: 'Notes',
-          icon: Icons.search,
+          icon: const Icon(Icons.search),
+          clickOnIcon: () {
+            showSearch(context: context, delegate: SearchDelegateView());
+          },
         ),
       ),
     );

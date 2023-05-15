@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:note_app/layouts/components.dart';
 
 class AppBarScreen extends StatelessWidget {
-  AppBarScreen({super.key, required this.txtTitle, required this.icon});
+  AppBarScreen({
+    super.key,
+    required this.txtTitle,
+    required this.icon,
+    required this.clickOnIcon,
+  });
 
   String txtTitle;
-  IconData icon;
+  Widget icon;
+  void Function()? clickOnIcon;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -13,7 +19,7 @@ class AppBarScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         TitleAppBarUI(txt: txtTitle),
-        IconAppBarUI(icon: icon),
+        IconAppBarUI(icon: icon, clickOn: clickOnIcon),
       ],
     );
   }
