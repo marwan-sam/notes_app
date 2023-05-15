@@ -258,7 +258,7 @@ Widget StandardUI({
       ),
     );
 
-StandardFormUI({
+Widget StandardFormUI({
   AutovalidateMode? autovalidateMode,
   Key? key,
   required Widget standardUI,
@@ -267,18 +267,6 @@ StandardFormUI({
       key: key,
       autovalidateMode: autovalidateMode,
       child: standardUI,
-    );
-Widget emptyListOfNote() => Column(
-      children: const [
-        Center(
-          child: Text(
-            "Don't Have Any Notes",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
     );
 
 Widget ListOf({

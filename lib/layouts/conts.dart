@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 const boxNoteHive = 'note_box';
 const blueDarkColor = Color(0xff2B475E);
