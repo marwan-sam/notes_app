@@ -20,6 +20,7 @@ void main() async {
   // stp = 3
   await Hive.openBox<NoteModel>(boxNoteHive);
 
+  // check for observer this bloc :
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
